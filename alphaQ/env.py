@@ -304,14 +304,14 @@ class PortfolioEnv(gym.Env):
         # portfolio and metrics
         self.result.plot(assets=False, weights=False, ucrp=True, bah=True, ax=ax1, linewidth=2)
         # bcrp
-        self.bcrp.plot(assets=False, weights=False, ucrp=False, bah=False, portfolio_label='BCRP', ax=ax1, color=(0.0, 0.8789398846597463, 1.0))
+        self.bcrp.plot(assets=False, weights=False, ucrp=False, bah=False, portfolio_label='BCRP', ax=ax1) #, color=(0.0, 0.8789398846597463, 1.0))
         # best stock
         asset_equity = self.result.asset_equity
         best_stock = asset_equity[asset_equity.iloc[-1].idxmax()]
         best_stock.rename('Best Stock').plot(ax=ax1).legend()
 
         # market
-        self.market.plot(assets=False, weights=False, ucrp=False, bah=False, portfolio_label='DJIA', ax=ax1, color='black')
+        self.market.plot(assets=False, weights=False, ucrp=False, bah=False, portfolio_label='DJIA', ax=ax1) #, color='black')
 
         print("============================================")
         print("Total wealth:", round(self.result.total_wealth, 4))

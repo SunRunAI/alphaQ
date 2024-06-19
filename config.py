@@ -73,7 +73,7 @@ START = '2008-03-19'
 # START = '2013-09-20'
 
 # end date for data used in experiments
-END = '2021-07-31'
+END = '2024-05-01'
 
 # number of units to divide discreted weights into
 SLICES = 8
