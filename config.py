@@ -65,15 +65,19 @@ DOW_TICKERS = [
 
 # TICKERS = ['AAPL', 'GE', 'JPM', 'MSFT', 'VOD', 'GS', 'MMM']
 # TICKERS = ['AAPL', 'GE', 'JPM', 'MSFT']
-TICKERS = ['AAPL', 'MSFT', 'V', 'JPM']
+
+# Sector tickers as classified by GICS
+# TODO: Could do with long standing stocks, not necessarily the biggest which are just goign to the moon the whole time.
+# TODO: Select stocks at random in each sector? Average weighting in sector across the analysis period?
+
+TICKERS = ['MSFT', 'AAPL', 'NVDA', 'QCOM']
 # TICKERS = ['AAPL', 'MSFT', 'V', 'JPM', 'JNJ', 'WMT']
 
 # start date from which to begin downloading ticker data
-START = '2008-03-19'
-# START = '2013-09-20'
+START = '2005-01-01'
 
 # end date for data used in experiments
-END = '2024-05-01'
+END = '2024-01-01'
 
 # number of units to divide discreted weights into
 SLICES = 8
