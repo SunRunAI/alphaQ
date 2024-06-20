@@ -38,7 +38,7 @@ def get_stats(result):
         result.winning_pct * 100,
         beta,
         alpha,
-        result.appraisal_ucrp,
+#         result.appraisal_ucrp,
         result.information,
         result.annualized_volatility,
         result.turnover,

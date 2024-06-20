@@ -11,8 +11,8 @@ MODELS = {
 }
 
 MODEL_PATH = {
-    'ddpg': 'models/DDPG_best.zip',
-    'dqn': 'models/DQN_best.zip'
+    'ddpg': 'models_test/best_model.zip', #'models/DDPG_best.zip',
+    'dqn': 'models/DQN_best.zip',
 }
 
 ACTION_SPACE = {
@@ -157,9 +157,9 @@ MODEL_PARAMS = {
 ##################################################
 
 CALLBACK_ENABLED = True
-CALLBACK_START = 20000
-SAVE_PATH = 'models/'
-LOG_PATH = 'logs/'
+CALLBACK_START = 1000  # TODO: This is the setting that stops first iter callbacks?
+SAVE_PATH = 'models_test/'
+LOG_PATH = 'logs_test/'
 CALLBACK_VERBOSE_LEVEL = 2
 
 ##################################################
@@ -177,7 +177,7 @@ ATTRIBUTES = [
     'winning_pct',
     'beta',
     'alpha',
-    'appraisal_ratio',
+    # 'appraisal_ratio',
     'information_ratio',
     'annualised_volatility',
     'annual_turnover',
@@ -191,24 +191,24 @@ OLPS_STRATEGIES = [
     algos.CRP(),
     algos.BCRP(),
     # algos.DCRP(),
-    algos.MPT(window=50, min_history=1, mu_estimator='historical', cov_estimator='empirical', q=0),  # min-variance
+    # algos.MPT(window=50, min_history=1, mu_estimator='historical', cov_estimator='empirical', q=0),  # min-variance
 
     # follow the winner
-    algos.UP(),
-    algos.EG(),
+    # algos.UP(),
+    # algos.EG(),
 
-    # follow the loser
-    algos.Anticor(window=WINDOW_LENGTH),
-    algos.PAMR(eps=1),
-    algos.OLMAR(window=WINDOW_LENGTH),
-    algos.RMR(window=WINDOW_LENGTH),
-    algos.CWMR(),
-    algos.WMAMR(window=WINDOW_LENGTH),
+    # # follow the loser
+    # algos.Anticor(window=WINDOW_LENGTH),
+    # algos.PAMR(eps=1),
+    # algos.OLMAR(window=WINDOW_LENGTH),
+    # algos.RMR(window=WINDOW_LENGTH),
+    # algos.CWMR(),
+    # algos.WMAMR(window=WINDOW_LENGTH),
 
-    # pattern matching
-    algos.BNN(k=WINDOW_LENGTH),
-    algos.CORN(),
+    # # pattern matching
+    # algos.BNN(k=WINDOW_LENGTH),
+    # algos.CORN(),
 
-    # meta-learning
-    algos.ONS(),
+    # # meta-learning
+    # algos.ONS(),
 ]
