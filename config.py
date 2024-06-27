@@ -12,7 +12,7 @@ MODELS = {
 
 MODEL_PATH = {
     'ddpg': 'models_test/best_model.zip', #'models/DDPG_best.zip',
-    'dqn': 'models/DQN_best.zip',
+    # 'dqn': 'models/DQN_best.zip',
 }
 
 ACTION_SPACE = {
@@ -70,11 +70,11 @@ DOW_TICKERS = [
 # TODO: Could do with long standing stocks, not necessarily the biggest which are just goign to the moon the whole time.
 # TODO: Select stocks at random in each sector? Average weighting in sector across the analysis period?
 
-TICKERS = ['MSFT', 'AAPL', 'NVDA', 'QCOM']
-# TICKERS = ['AAPL', 'MSFT', 'V', 'JPM', 'JNJ', 'WMT']
+# TICKERS = ['MSFT', 'AAPL', 'NVDA', 'QCOM']  # Tech
+TICKERS = ['AMZN', 'HD', 'MCD', 'BKNG']  # Consumer Discretionary
 
 # start date from which to begin downloading ticker data
-START = '2005-01-01'
+START = '2006-01-01'
 
 # end date for data used in experiments
 END = '2024-01-01'
@@ -157,9 +157,10 @@ MODEL_PARAMS = {
 ##################################################
 
 CALLBACK_ENABLED = True
-CALLBACK_START = 1000  # TODO: This is the setting that stops first iter callbacks?
-SAVE_PATH = 'models_test/'
-LOG_PATH = 'logs_test/'
+CALLBACK_START = 1000  # This is the setting that stops first iter callbacks
+# Yes, to avoid saving lucky random early models.
+SAVE_PATH = 'models/'
+LOG_PATH = 'logs/'
 CALLBACK_VERBOSE_LEVEL = 2
 
 ##################################################

@@ -3,6 +3,8 @@
 from datetime import datetime
 from itertools import combinations
 
+import pickle
+import boto3
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -13,6 +15,18 @@ def download_ticker_data(tickers, start='2000-01-01', end=datetime.today().date(
     """Download price data for multiple tickers in bulk."""
     data = yf.download(tickers, start=start, end=end)
     return data[columns]
+
+def save_to_s3(obj, key, bucket='shelf'):
+    pickled_data = pickle.dumps(obj)
+    s3 = boto3.client('s3')
+    s3.put_object(Bucket=bucket, Key=key, Body=pickled_data)
+    print("Success!")
+
+def load_from_s3(key, bucket='shelf'):
+    s3 = boto3.client('s3')
+    response = s3.get_object(Bucket=bucket, Key=key)
+    pickled_data = response['Body'].read()
+    return pickle.loads(pickled_data)
 
 
 def train_test_split(data, n_train=None, train_years=10, validation_set=True):

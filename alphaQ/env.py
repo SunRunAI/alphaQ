@@ -33,6 +33,7 @@ class PortfolioEnv(gym.Env):
         # enable or disable rendering for environment
         self.render_enabled = env_config.get('render', True)
         self.render_mode = env_config.get('render_mode', 'train')
+        self.render_freq = env_config.get('render_freq', 1)  # Frequency of verbose renders
 
         # prices not provided
         if prices is None and tickers is not None:
@@ -247,8 +248,8 @@ class PortfolioEnv(gym.Env):
 
             if self.render_mode == 'train':
                 print("EPISODE:", self.episode_count, 'Steps:', self.counter)
-
-            if self.render_enabled:
+                print('Training episode reward:', self.df_info['rate_of_return'].sum())
+            if (self.episode_count % self.render_freq == 0) and self.render_enabled:
                 self.render(self.render_mode)
 
         return observation, reward, done, info

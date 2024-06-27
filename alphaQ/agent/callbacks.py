@@ -51,7 +51,7 @@ class EvalCallback(EventCallback):
         self,
         eval_env: Union[gym.Env, VecEnv],
         callback_on_new_best: Optional[BaseCallback] = None,
-        n_eval_episodes: int = 5,
+        n_eval_episodes: int = 1,
         eval_freq: int = 10000,
         log_path: str = None,
         best_model_save_path: str = None,
@@ -114,11 +114,6 @@ class EvalCallback(EventCallback):
 
     def _on_step(self) -> bool:
 
-        if self.n_calls < CALLBACK_START:
-            # in case the callback threshold has not been reached,
-            # return without saving model
-            return True
-
         if self.eval_freq > 0 and self.n_calls % self.eval_freq == 0:
             # Sync training and eval env if there is VecNormalize
             sync_envs_normalization(self.training_env, self.eval_env)
@@ -180,8 +175,11 @@ class EvalCallback(EventCallback):
             if mean_reward > self.best_mean_reward:
                 if self.verbose > 0:
                     print("New best mean reward!")
-                if self.best_model_save_path is not None:
-                    self.model.save(os.path.join(self.best_model_save_path, "best_model"))
+                if self.n_calls < CALLBACK_START:
+                    print("Disregarding model since we are early in training run...")
+                else:
+                    if self.best_model_save_path is not None:
+                        self.model.save(self.best_model_save_path)
                 self.best_mean_reward = mean_reward
                 # Trigger callback if needed
                 if self.callback is not None:
